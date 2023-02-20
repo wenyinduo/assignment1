@@ -8,6 +8,10 @@ def clean(other_info_file, contact_info_file):
     data_clean = data_merge.dropna()
     data_clean = data_clean[~ data_clean['job'].str.contains('Insurance|insurance')]
     data_clean = data_clean.drop('id', axis=1)
+    row = data_clean.shape[0]
+    col = data_clean.shape[1]
+    print(f'The row of output_file is {row}.')
+    print(f'The column of output_file is {col}.')
     return data_clean
 
 
@@ -21,8 +25,8 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    output_file = clean(args.other_info_file, args.contact_info_file)
-    output_file.to_csv(args.output_file, index=False)
+    cleaned = clean(args.other_info_file, args.contact_info_file)
+    cleaned.to_csv(args.output_file, index=False)
 
 
 
